@@ -1,0 +1,225 @@
+1. 머스태치, v-text, v-html
+<h1>{{ name }}</h1>
+<h1 v-text="name"></h1>
+<div v-text="`${name} 안녕`"></div>
+
+<template>
+  <div>
+    <h1>{{ name }}</h1>
+    <h1 v-text="name"></h1>
+    <div v-text="`${name} 안녕`"></div>
+    <p v-html="button"></p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      name : "haha",
+      button : "<button>버튼</button>"
+    }
+  }
+}
+
+
+2. v-bind
+<template>
+  <div>
+    <h1 v-bind:id="haha">hello</h1>
+    <a v-bind:href="url">naver 바로가기</a>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      haha : "blue",
+      url : "http://naver.com"
+    }
+  }
+}
+</script>
+
+<style>
+  #blue {
+    color: blue;
+  }
+</style>
+
+3. 삼항연산자 사용
+<template>
+  <div>
+    <h1 :class="isDone === false ? 'blue' : ''">안녕</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      isDone : false,
+
+    }
+  }
+}
+</script>
+
+<style>
+ .blue { color : blue}
+</style>
+
+4. v-once
+<template>
+  <div>
+    <h1>name : {{ user.name }}</h1>
+    <h1 v-once v-text="user.name"></h1> // 처음렌더링되면 model같은걸로 수정해도 바뀌지않음 값이
+    <input type="text" v-model="user.name">
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      user : {
+        name :'kim',
+        age : 23,
+        job : "shehdwk"
+      }
+    }
+  }
+}
+</script>
+
+<style>
+</style>
+
+5. v-if, v-else., v-show
+<template>
+  <div>
+    <div v-if="bolean">안녕하세요</div>
+    <div v-else>안녕하가세요</div>
+
+    <div v-show="bolean">안녕하다</div> // 얘는 v-if랑 비슷한데 v-if는 아예 출력이안되지만 얘는 html코드에 남으며 dn처리만 되어있음
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      bolean : false,
+      user : {
+        name :'kim',
+        age : 23,
+        job : "shehdwk"
+      }
+    }
+  }
+}
+</script>
+
+<style>
+</style>
+
+6. v-for
+<template>
+  <div>
+    <!-- of랑 in이랑 차이점 잘 몰?루 -->
+    <ul>
+      <li v-for="(x,i) of fruits" :key="i">{{ x }}{{ i }}</li>
+    </ul>
+    <div v-for="(value,key,i) in user" :key="i">{{ value }} {{ key }} {{ i }}</div>
+    <div v-for="(x,i) in people" :key="i">
+      {{ x.name }},{{ x.age }},{{ i }}
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      fruits : ["banana","apple","melon"],
+      user : {
+        name : "kim",
+        age : 23
+      },
+      people : [
+        {name : "kim",age:23},
+        {name : "lee",age:42},
+        {name : "sang",age:29}
+      ]
+    }
+  }
+}
+</script>
+
+7. v-if + v-for
+<template>
+  <div>
+    <ul>
+      <template v-for="(x,i) in people"> // 빈공간에 식을쓰고싶어 template을사용
+          <li v-if="x.age == 20" :key="i">{{ x.name }}{{ i }}</li>
+      </template>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      people : [
+        {name : "kim", age:20},
+        {name : "lee", age:10},
+        {name : "sang", age:30},
+        {name : "park", age:20},
+        {name : "kim", age:10},
+        {name : "kang", age:40}
+      ]
+    }
+  }
+}
+</script>
+
+
+8. methods 사용해서 함수사용
+<template>
+  <div>
+    <div>{{ add(0) }}</div>
+    <div>{{ add(1) }}</div>
+    <div>{{ addadd(50) }}</div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      age : 30
+    }
+  },
+  methods:{
+    add(num=0){ // 파라미터값의 기본값을 지정! 파라미터2개일때 nan안뜨게가능,파라미터2개여도 하나만적어도 기본값으로계산해줌
+      // this를 써야 vue가 가진 데이터에 접근가능!
+      return this.age + num;
+    },
+    addadd(num){
+      return this.add(num)
+    }
+  }
+}
+</script>
+
+9. 

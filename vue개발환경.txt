@@ -15,3 +15,11 @@ npm init vue@latest - 요즘은 이거쓴다함
 그리고 cd 폴더명
 npm install 해서 노드모듈깔기 - npm init 이걸로하면 모듈안깔림
 화면띄우려면 npm run dev
+
+
+확장프로그램 
+vuter - 
+
+vue 3 snippet - 
+
+prettier - 줄바꿈 정렬 - 컨트롤 쉬프트 p -> setting ui
