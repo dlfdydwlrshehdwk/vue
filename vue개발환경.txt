@@ -1,0 +1,17 @@
+
+vue cli 설치하기
+npm install -g @vue/cli
+-g = 글로벌하게 설치하기
+
+뷰프로젝트만들기
+vue create 폴더명
+ex ) vue create vue-practice
+
+
+뷰프로젝트만들기2 
+npm init vue@latest - 요즘은 이거쓴다함
+뭐 나오면 다 no
+
+그리고 cd 폴더명
+npm install 해서 노드모듈깔기 - npm init 이걸로하면 모듈안깔림
+화면띄우려면 npm run dev
