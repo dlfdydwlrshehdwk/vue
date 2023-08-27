@@ -222,4 +222,181 @@ export default {
 }
 </script>
 
-9. 
+9. v-on:click="메소드"
+<template>
+  <div>
+    <h1>{{ jam }}</h1>
+    <button v-on:click="chgJam">눌러!</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      jam : "vuejs재미없어!"
+    }
+  },
+  methods:{
+    chgJam(){
+      this.jam = "vuejs짱잼!"
+    }
+  }
+}
+</script>
+
+10. v-model, input관련, 한글텍스트 한틱씩 밀리는거 수정
+<template>
+  <div>
+    {{ user }}
+    <form>
+      <div>
+        <label for="name">이름</label>
+        <input type="text" id="name" v-model="user.name" @input="setValue">
+      </div>
+      <div>
+        <label for="age">나이</label>
+        <input type="text" id="age" v-model="user.age">
+      </div>
+      <div>
+        <label for="city">사는곳</label>
+        <select id="city" v-model="user.city">
+          <option value="seoul">서울</option>
+          <option value="daegu">대구</option>
+          <option value="busan">부산</option>
+        </select>
+      </div>
+      <div>
+
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      user:{
+        name :'',
+        age : 0
+      }
+    }
+  },
+  methods:{
+    // 한글로치면 한틱씩 밀리는걸 방지하는 함수
+    setValue(e){
+      this.user.name = e.target.value
+    }
+  }
+}
+</script>
+
+11. Directives
+나만의 커스텀 v-on 같은거 만들수있는거 
+잘모르겠음씨의팔
+
+12. coumputed
+<template>
+  <div>
+      <div>
+      // v-pre = 머스태치 안되게 하는거!
+        <h2 v-pre>{{  username }}</h2>
+        <h2>{{ totalScroe }}</h2>
+      </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      grade : {
+        math : 30,
+        sci : 70,
+        eng : 10,
+        kor : 100
+      }
+    }
+  },
+  // methods와의 차이점 값같은게 변해도 재호출되지않는다고함
+  computed:{
+    totalScroe(){
+      // 앞에꺼 떼게해주는거
+    
+      const { math, kor, eng, sci} = this.grade;
+      // 원래라면
+      // return this.grade.math + this.grade.kor + this.grade.eng + this.grade.sci
+      return math + kor + eng + sci; 
+    }
+  },
+  directives:{
+  },
+  methods:{
+  }
+}
+</script>
+
+13.watch
+<template>
+  <div>
+      <div>
+        <h1>Watchers</h1>
+        <div>{{ money }}</div>
+        <button @click="money = money + 100">+100</button>
+        <button @click="money = money - 100">-100</button>
+      </div>
+      <h3>{{ receit }}</h3>
+      <button @click="receit.food+=500">receit 조작</button>
+      <hr>
+      <input type="text" v-model="name">
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      name : "kim",
+      money : 0,
+      receit : {
+        food : 3000,
+        fee : 200,
+        fare : 10000
+      }
+    }
+  },
+  // data에서 값이 바뀔때마다 체크를해줌(바뀐값, 바뀌기전값)
+  watch:{
+    money(newValue, oldValue){
+      console.log(newValue,oldValue)
+    },
+    // 객체데이터면 이렇게 해야한다고함
+    receit : {
+      handler(newvalue){
+        console.log(newvalue)
+      },
+      // 객체일때 바뀌는걸 확인할수있게해줌
+      deep : true
+    },
+    name : {
+      handler(newvalue){
+        console.log(newvalue);
+      },
+      // 바뀌어야만 체크를해주는데 이거하면 첫값도 체크해줌
+      immediate : true
+    }
+  },
+  computed:{
+  },
+  directives:{
+    
+  },
+  methods:{
+  }
+}
+</script>
