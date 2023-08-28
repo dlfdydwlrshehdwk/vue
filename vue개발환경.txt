@@ -16,6 +16,8 @@ npm init vue@latest - 요즘은 이거쓴다함
 npm install 해서 노드모듈깔기 - npm init 이걸로하면 모듈안깔림
 화면띄우려면 npm run dev
 
+원래있던 vue파일을 가져와서쓸때
+-> 뷰파일부모한테 npm install -g @vue/cli -> npm install 해서 노드모듈깔아주기
 
 확장프로그램 
 vuter - 
