@@ -296,7 +296,7 @@ export default {
 
 11. Directives
 나만의 커스텀 v-on 같은거 만들수있는거 
-잘모르겠음씨의팔
+잘모르겠음
 
 12. coumputed
 <template>
@@ -397,6 +397,285 @@ export default {
     
   },
   methods:{
+  }
+}
+</script>
+
+14. component - props,$emit
+App.vue
+<template>
+  <div>
+    <button @click="popup = true">popup</button>
+    <DetailView v-if="popup == true" @popupClose="popupClose" @sendData="showData"/>
+  </div>
+</template>
+
+<script>
+import DetailView from './components/DetailView.vue';
+export default {
+    name: "App",
+    data() {
+        return {
+          popup : false,
+        };
+    },
+    watch: {},
+    computed: {},
+    directives: {},
+    methods: {
+      popupClose(){
+        this.popup = false
+      },
+      showData(data){
+        console.log(data,'전송완료')
+      }
+    },
+    components: {  
+      DetailView
+    }
+};
+</script>
+
+DetailView
+<template>
+  <div class="wrapper">
+    <div class="container">
+      <h2>Detail Page</h2>
+      <button @click="popupClose">close</button>
+      <input type="text" v-model="username">
+      <button @click="sendData">send</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name : "detailView",
+  data(){
+    return{
+      username : ""
+    }
+  },
+  methods : {
+    popupClose(){
+      this.$emit("popupClose")
+    },
+    sendData(){
+      this.$emit("sendData", this.username)
+    }
+  }
+
+}
+</script>
+
+
+15. component - provide , inject 컴포넌트안에 컴포넌트 안에 컴포넌트 인애한테 한번에 프롭스주기
+
+<template>
+  <div>
+    <CompLevel1 />
+  </div>
+</template>
+
+<script>
+import CompLevel1 from './components/provide-inject/CompLevel1.vue';
+export default {
+    name: "App",
+    data() {
+        return {
+          username : 'kim'
+        };
+    },
+    provide(){
+      return{
+        name : this.username,
+      }
+    },
+    watch: {},
+    computed: {},
+    directives: {},
+    methods: {
+    },
+    components: { 
+      CompLevel1
+    }
+};
+</script>
+
+<template>
+  <div>
+  <h2>component 3</h2>
+  <h3>데이터전송 {{ name }}</h3>
+  </div>
+</template>
+
+<script>
+export default {
+  name : "compThree",
+  inject : ["name"] // 왜인지는 모르나 대괄호 중요
+}
+</script>
+
+<style>
+
+</style>
+
+16. component - 다이나믹컴포넌트 - 상황에따라 다른 컴포넌트 보이기 v-if안쓰고
+<template>
+  <div>
+    <button @click="activeTab = 'Menu1'"></button>
+    <button @click="activeTab = 'Menu2'"></button>
+    <button @click="activeTab = 'Menu3'"></button>
+    <keep-alive> // 인풋같은거에 있는거 데이터 유지
+    <component :is="activeTab"></component> // 다이나믹컴포넌트
+    </keep-alive>
+  </div>
+</template>
+
+<script>
+import Menu1 from './components/provide-inject/Menu1.vue';
+import Menu2 from './components/provide-inject/Menu2.vue';
+import Menu3 from './components/provide-inject/Menu3.vue';
+export default {
+    name: "App",
+    data() {
+        return {
+          activeTab : "Menu1"
+        };
+    },
+    provide(){
+      return{
+        name : this.username,
+      }
+    },
+    watch: {},
+    computed: {},
+    directives: {},
+    methods: {
+    },
+    components: { 
+      Menu1, Menu2, Menu3
+    }
+};
+</script>
+
+17. component slot - slot에 따른 다양한사용방법이 있다. 약간 테두리같은거만 꾸며두고 내용물은 내가채우는느낌으로
+App.vue
+<template> 
+  <div>
+    <CardView>
+      <template v-slot:header>
+        <h2>ㅎㅇ</h2>
+      </template>
+      <template v-slot:body>
+        <div>안녕</div>
+      </template>
+      <template v-slot:footer>
+        <span>ㅎㅎ</span>
+      </template>
+    </CardView>
+  </div>
+</template>
+
+<script>
+import CardView from "./components/slot/CardView.vue"
+export default {
+    name: "App",
+    data() {
+        return {
+        };
+    },
+    provide(){
+      return{
+      }
+    },
+    watch: {},
+    computed: {},
+    directives: {},
+    methods: {
+    },
+    components: { 
+      CardView
+    }
+};
+</script>
+
+CardView.vue
+<template>
+  <div class="card">
+    <div class="card-header"><slot name="header"></slot></div>
+    <div class="card-body"><slot name="body"></slot></div>
+    <div class="card-footer"><slot name="footer"></slot></div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+  .card{
+    box-shadow: 2px 2px 5px gray;
+    width: 200px;
+  }
+</style>
+
+18. teleport - #App 에 국한되지 않고 다른곳으로 이동가능 ex index.html에서 다른 클래스명 만들어서 사용가능 하다는 소리
+<teleport to="# or . 아이디 or 클래스명"></teleport>
+
+19. http request - axios api요청, 전송 then catch
+
+<template>
+  <div>
+  <h2>HP</h2>
+  <button @click="request">request</button>
+  <ul>
+    <li v-for="(x,i) in requestList" :key="i">{{ x.title }}</li>
+  </ul>
+
+  <div>
+    <label>할일</label>
+    <input type="text" v-model="todoItem.title">
+    <button @click="createTodo">전송</button>
+  </div>
+
+  <p v-if="errorMessage">{{ errorMessage }}</p>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name : "HTTP",
+  data() {
+    return {
+      requestList : [],
+      errorMessage :"",
+      todoItem : {
+        title : "",
+        completed : false
+      },
+
+    }
+  },
+  methods : {
+    request(){
+      const url = "https://jsonplaceholder.typicode.com/todos"
+      axios.get(url)
+      .then((res) => this.requestList = res.data)
+      .catch((e) => {
+        console.log(e)
+        this.errorMessage = "에러"
+      })
+    },
+    createTodo(){
+      const url = "https://jsonplaceholder.typicode.com/todos"
+      axios.post(url,this.todoItem)
+      .then((res)=>console.log(res))
+      .catch((e)=>console.log(e))
+    }
   }
 }
 </script>
