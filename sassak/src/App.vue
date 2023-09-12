@@ -1,12 +1,12 @@
 <template>
   <div>
     <h2>App</h2>
-    <ParentComp />
+    <ProductStatus />
   </div>
 </template>
 
 <script>
-import ParentComp from './components/lifecycle/ParentComp.vue'
+import ProductStatus from './components/mixin/ProductStatus.vue'
 export default {
     name: "App",
     data() {
@@ -23,7 +23,7 @@ export default {
     methods: {
     },
     components: { 
-      ParentComp
+      ProductStatus
     }
 };
 </script>
