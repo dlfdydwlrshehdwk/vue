@@ -1,0 +1,14 @@
+.btn{
+  border: 1px solid orange;
+  background-color: bisque;
+  padding: 12px;
+  border-radius: 35px;
+  cursor: pointer;
+}
+.closePopup{
+  border: 1px solid orange;
+  background-color: rgb(241, 152, 241);
+  padding: 12px;
+  border-radius: 35px;
+  cursor: pointer;
+}
