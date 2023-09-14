@@ -85,7 +85,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
   }
   .popup1_popup{
     position: absolute;
@@ -95,29 +95,34 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
+    border: none;
     border-radius: 40px;
     padding: 24px;
-    background-color: #fff;
+    background-color: white;
+    overflow: hidden;
   }
   .popup1_header{
     display: flex;
     padding: 24px;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     border-radius: 35px;
     justify-content: space-between;
+    background-color: #f4f5f8;
   }
   .closePopup {
     cursor: pointer;
   }
   .popup1_body{
     padding: 24px;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     border-radius: 35px;
+    background-color: #f4f5f8;
   }
   .garimmak{
-    background-color: rgba(222, 184, 135, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
+    border-radius: 40px;
     top: 0;
     left: 0;
     bottom: 0;

@@ -11,16 +11,15 @@
 </template>
 
 <script>
+import useMoney from '../../composables/useMoney'
 export default {
   name : "productStatus",
-  data (){
+  setup(){
+    const { addMoney,totalMoney} = useMoney()
+    
     return {
-      totalMoney : 0,
-    }
-  },
-  methods : {
-    addMoney (price){
-      this.totalMoney += price
+      addMoney,
+      totalMoney
     }
   }
 }

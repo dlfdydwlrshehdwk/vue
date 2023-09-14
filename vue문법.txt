@@ -298,7 +298,10 @@ export default {
 나만의 커스텀 v-on 같은거 만들수있는거 
 잘모르겠음
 
-12. coumputed
+12. coumputed - 연산프로퍼티
+쓰는이유 - 템플릿안에서쓰면 보기어려움, 메소드처럼 재사용가능, 
+methods와 기능이 비슷하나 methods가 렌더링마다 실행이 되는거라면 
+computed는 값이 바뀌지않는한 재실행되지않음 -> 속도가빠름
 <template>
   <div>
       <div>

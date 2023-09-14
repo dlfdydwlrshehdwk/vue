@@ -59,13 +59,20 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background-color: beige;
+    background-color: white;
     border-radius: 35px;
-    border: 1px solid #000;
-    padding: 24px
+    padding: 24px;
+    overflow: hidden;
   }
   .popup2_header{
     display: flex;
     justify-content: space-between;
+    background-color: #f4f5f8;
+    padding: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .popup_body{
+    background-color: #f4f5f8;
   }
 </style>
