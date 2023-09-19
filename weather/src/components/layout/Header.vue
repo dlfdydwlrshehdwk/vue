@@ -8,7 +8,11 @@
 <script>
 export default {
   name : 'headerLayout',
-
+  data(){
+    return{
+      username : 'kim'
+    }
+  }
 }
 </script>
 

@@ -10,7 +10,7 @@
 import {reactive} from 'vue'
 export default {
   name : "citySelector",
-  setup() {
+  setup(props,context) {
     const cities = reactive([
       { city : "Seoul", label : "서울", selected : false},
       { city : "Tokyo", label : "도쿄", selected : false},
@@ -19,11 +19,14 @@ export default {
       { city : "Yakutsk", label : "야크추크", selected : false}
     ])
     const selected = function(city){
-      city.selected = !city.selected
+      city.selected = !city.selected;
+      context.emit('selectCity',city)
     }
     return{
       cities,
-      selected
+      selected,
+      props,
+
     }
   },
 
