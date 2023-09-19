@@ -682,3 +682,33 @@ export default {
   }
 }
 </script>
+
+뷰3 setup
+<template>
+  <div>
+    <ul class="city-selector">
+      <li :class="{isSelected : x.selected == true}" @click="selected(x)" v-for="(x,i) in cities" :key="i">{{ x.label }}</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import {reactive} from 'vue'
+export default {
+  name : "citySelector",
+  setup() {
+    const cities = reactive([
+      { city : "Seoul", label : "서울", selected : false},
+      { city : "Tokyo", label : "도쿄", selected : false},
+      { city : "London", label : "런던", selected : false},
+      { city : "Moscow", label : "모스크바", selected : false},
+      { city : "Yakutsk", label : "야크추크", selected : false}
+    ])
+    const selected = function(city){
+      city.selected = !city.selected
+    }
+    return{
+      cities,
+      selected
+    }
+  },
